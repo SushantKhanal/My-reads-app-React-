@@ -31,7 +31,7 @@ class SearchPage extends Component {
 		}else {
 			showingBooks=this.props.books
 		}
-		//console.log(this.props.books)
+		console.log(this.state.books)
 
 		//showingBooks.sort(sortBy('name'))
 
@@ -58,10 +58,10 @@ class SearchPage extends Component {
 	                    <div className="book-shelf-changer">
 	                      <select>
 	                        <option value="none" disabled>Move to...</option>
-	                        <option value="currentlyReading">Currently Reading</option>
-	                        <option value="wantToRead">Want to Read</option>
-	                        <option value="read">Read</option>
-	                        <option value="none">None</option>
+	                        <option value="currentlyReading" id="a">Currently Reading</option>
+	                        <option value="wantToRead" id="b">Want to Read</option>
+	                        <option value="read" id = "c">Read</option>
+	                        <option value="none" id = "d">None</option>
 	                      </select>
 	                    </div>
 	                  </div>

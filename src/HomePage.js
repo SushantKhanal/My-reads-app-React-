@@ -5,18 +5,34 @@ import { Link } from 'react-router-dom'
 class HomePage extends Component {
   state = {
     currentlyReading: [],
-    wantToRead: [],
-    read: [],
-    none: []
+    valueA: 'currentlyReading',
+    valueB: 'wantToRead',
+    valueC: 'read'
   }
 
+  handleChangeA(book,event) {
+    this.setState({valueA: event.target.value})
+    book.shelf=event.target.value    
+  }
+
+  handleChangeB(book,event) {
+    this.setState({valueB: event.target.value})
+    book.shelf=event.target.value    
+  }  
+
+  handleChangeC(book,event) {
+    //debugger
+    this.setState({valueC: event.target.value})
+    book.shelf=event.target.value
+  }
+/*
   bookShelves = (books)=>{
     this.setState({ currentlyReading: books.filter((book)=>(book.shelf==="currentlyReading"))})
     this.setState({ wantToRead: books.filter((book)=>(book.shelf==="wantToRead"))})
     this.setState({ read: books.filter((book)=>(book.shelf==="read"))})
     this.setState({ none: books.filter((book)=>(book.shelf==="none"))})
   }
-
+*/
 	render() {
     //console.log(this.props.books)
     //this.props.books.map((book)=>{console.log(book.shelf)})
@@ -40,11 +56,11 @@ class HomePage extends Component {
                                 <div className="book-top">
                                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                                   <div className="book-shelf-changer">
-                                    <select>
+                                    <select value={this.state.valueA} onChange={(e) => this.handleChangeA(book,e)}>
                                       <option value="none" disabled>Move to...</option>
-                                      <option value="currentlyReading">Currently Reading</option>
-                                      <option value="wantToRead">Want to Read</option>
-                                      <option value="read">Read</option>
+                                      <option value="currentlyReading" id="aa">Currently Reading</option>
+                                      <option value="wantToRead" id="bb" >Want to Read</option>
+                                      <option value="read" id="cc">Read</option>
                                       <option value="none">None</option>
                                     </select>
                                   </div>
@@ -68,7 +84,7 @@ class HomePage extends Component {
                                 <div className="book-top">
                                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                                   <div className="book-shelf-changer">
-                                    <select>
+                                    <select value={this.state.valueB} onChange={(e) => this.handleChangeB(book,e)}>
                                       <option value="none" disabled>Move to...</option>
                                       <option value="currentlyReading">Currently Reading</option>
                                       <option value="wantToRead">Want to Read</option>
@@ -96,7 +112,7 @@ class HomePage extends Component {
                                 <div className="book-top">
                                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                                   <div className="book-shelf-changer">
-                                    <select>
+                                    <select value={this.state.valueC} onChange={(e) => this.handleChangeC(book,e)}>
                                       <option value="none" disabled>Move to...</option>
                                       <option value="currentlyReading">Currently Reading</option>
                                       <option value="wantToRead">Want to Read</option>
