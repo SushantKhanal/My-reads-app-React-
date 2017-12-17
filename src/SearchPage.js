@@ -1,29 +1,39 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import sortBy from 'sort-by'
+//import sortBy from 'sort-by'
 import * as BooksAPI from './BooksAPI'
 
 class SearchPage extends Component {
 
 	state = {
-		query: '',
 		books: []
 	}
+    searchBooks = (e)=>{
+        const query = e.target.value;
+        if (!query) {
+            this.setState({books: []});
+            return;
+        }
 
-	updateQuery = (query) => {
-		this.setState({ query: query.trim() })
-	    BooksAPI.search(this.state.query).then((books) => {
-	      this.setState({ books }) 
-	    })		
-	}
+    	BooksAPI.search(e.target.value).then((books) => {
+    		if(books.error) {
+    			books = []
+    		}
+      		this.setState({ books }) 
+    	})
+  	}  	
 
 	render() {
 		const { query } = this.state
-		let showingBooks=this.state.books
-
+		let showingBooks
+		if (this.state.books.length>0) {
+			showingBooks=this.state.books
+		}else {
+			showingBooks=this.props.books
+		}
 		//console.log(this.props.books)
 
-		showingBooks.sort(sortBy('name'))
+		//showingBooks.sort(sortBy('name'))
 
 		return(
           <div className="search-books">
@@ -34,13 +44,12 @@ class SearchPage extends Component {
                 	type="text"
                 	placeholder="Search by title or author"
                 	value={query}
-                	onChange={(event) => this.updateQuery(event.target.value)}
+                	onChange={this.searchBooks}
                 />
               </div>
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-
               	{showingBooks.map((book) => (      	        	
 	              <li key={book.title}>
 	                <div className="book">
