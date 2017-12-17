@@ -1,27 +1,25 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import * as BooksAPI from './BooksAPI'
+
 class SearchPage extends Component {
 
 	state = {
-		query: ''
+		query: '',
+		books: []
 	}
 
 	updateQuery = (query) => {
 		this.setState({ query: query.trim() })
+	    BooksAPI.search(this.state.query).then((books) => {
+	      this.setState({ books }) 
+	    })		
 	}
 
 	render() {
 		const { query } = this.state
-		let showingBooks
-
-		if (query) {
-			const match = new RegExp(escapeRegExp(query),'i')
-			showingBooks = this.props.books.filter((book)=>match.test(book.title))
-		}else{
-			showingBooks=this.props.books
-		}
+		let showingBooks=this.state.books
 
 		//console.log(this.props.books)
 
@@ -31,12 +29,11 @@ class SearchPage extends Component {
           <div className="search-books">
             <div className="search-books-bar">
 			  <Link className="close-search" to="/">Close</Link>
-			  {JSON.stringify(this.state)}
               <div className="search-books-input-wrapper">
                 <input
                 	type="text"
                 	placeholder="Search by title or author"
-                	value={this.state.query}
+                	value={query}
                 	onChange={(event) => this.updateQuery(event.target.value)}
                 />
               </div>
