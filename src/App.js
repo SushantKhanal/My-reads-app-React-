@@ -18,19 +18,12 @@ class BooksApp extends React.Component {
 //      this.setState({ contacts: contacts })
 
     } )
-  }  
+  }
+
 
   render() {
     return (
       <div className="app">
-        <Route path='/search' render={() => (
-          <div>
-            <SearchPage
-              books={this.state.books}
-            />
-          </div>
-        )}/>
-
         <Route exact path='/' render={() => (
           <div>
             <HomePage
@@ -38,6 +31,16 @@ class BooksApp extends React.Component {
             />
           </div>  
         )}/>
+
+        <Route path='/search' render={() => (
+          <div>
+            <SearchPage
+              books={this.state.books}
+              reload={this.reload}
+            />
+          </div>
+        )}/>
+
       </div>
     )
   }

@@ -6,7 +6,8 @@ import * as BooksAPI from './BooksAPI'
 class SearchPage extends Component {
 
 	state = {
-		books: []
+		books: [],
+	    value: 'none'
 	}
     searchBooks = (e)=>{
         const query = e.target.value;
@@ -20,8 +21,25 @@ class SearchPage extends Component {
     			books = []
     		}
       		this.setState({ books }) 
-    	})
+    	})    	
   	}  	
+	handleChange(book,event) {
+		this.setState({value: event.target.value})
+		book.shelf=event.target.value
+		BooksAPI.update(book,book.shelf)
+		console.log(book)
+		this.props.books.push(book)
+	}
+	findValue(book){
+		if (book.shelf){
+				return book.shelf
+		}else{
+			return 'none'
+		}
+	}
+	fixBookShelf(book){
+		this.props.books.filter((book1)=>(book1.id===book.id)).map((book2)=>(book.shelf=book2.shelf))
+	}
 
 	render() {
 		const { query } = this.state
@@ -31,8 +49,7 @@ class SearchPage extends Component {
 		}else {
 			showingBooks=this.props.books
 		}
-		console.log(this.state.books)
-
+		console.log(showingBooks)
 		//showingBooks.sort(sortBy('name'))
 
 		return(
@@ -50,14 +67,14 @@ class SearchPage extends Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-              	{showingBooks.map((book) => (      	        	
-	              <li key={book.title}>
+              	{showingBooks.map((book) => (
+	              <li key={book.id}>
+	              {this.fixBookShelf(book)}	      	        	
 	                <div className="book">
 	                  <div className="book-top">
 	                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
 	                    <div className="book-shelf-changer">
-	                      <select>
-	                        <option value="none" disabled>Move to...</option>
+	                      <select value={this.findValue(book)} onChange={(e) => this.handleChange(book,e)}>
 	                        <option value="currentlyReading" id="a">Currently Reading</option>
 	                        <option value="wantToRead" id="b">Want to Read</option>
 	                        <option value="read" id = "c">Read</option>
