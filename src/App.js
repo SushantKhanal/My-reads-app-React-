@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-//import { Link } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import SearchPage from './components/SearchPage'
 import * as BooksAPI from './BooksAPI'
@@ -36,7 +35,6 @@ class BooksApp extends React.Component {
           <div>
             <SearchPage
               books={this.state.books}
-              reload={this.reload}
             />
           </div>
         )}/>

@@ -9,7 +9,7 @@ class SearchPage extends Component {
 		books: [],
 	    value: 'none'
 	}
-    searchBooks = (e)=>{
+  searchBooks = (e)=>{
         const query = e.target.value;
         if (!query) {
             this.setState({books: []});
@@ -22,7 +22,7 @@ class SearchPage extends Component {
     		}
       		this.setState({ books }) 
     	})    	
-  	}  	
+  }  	
 	handleChange(book,event) {
 		this.setState({value: event.target.value})
 		book.shelf=event.target.value
@@ -42,7 +42,7 @@ class SearchPage extends Component {
 		return(
           <div className="search-books">
             <div className="search-books-bar">
-			  <Link className="close-search" to="/">Close</Link>
+			      <Link className="close-search" to="/">Close</Link>
               <div className="search-books-input-wrapper">
                 <input
                 	type="text"
