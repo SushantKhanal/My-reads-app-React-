@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 //import { Link } from 'react-router-dom'
-import HomePage from './HomePage'
-import SearchPage from './SearchPage'
+import HomePage from './components/HomePage'
+import SearchPage from './components/SearchPage'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
