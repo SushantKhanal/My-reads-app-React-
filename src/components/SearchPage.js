@@ -24,6 +24,7 @@ class SearchPage extends Component {
       		this.setState({ books }) 
     	})    	
   }  	
+  
 	handleChange(book,event) {
 		this.setState({value: event.target.value})
 		book.shelf=event.target.value

@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class SearchBookResult extends Component {
-  findValue(book){
-    if (book.shelf){
-        return book.shelf
-    }else{
-      return 'none'
+//functional stateless component to improve performance of application 
+function SearchBookResult(props) {
+    function findValue(book){
+      if (book.shelf){
+          return book.shelf
+      }else{
+        return 'none'
+      }
     }
-  }
 
-	render() {
 		return(
       <ol className="books-grid">
-        {this.props.showingBooks.map((book) => (
+        {props.showingBooks.map((book) => (
         <li key={book.id}>
-        {this.props.fixBookShelf(book)}                   
+        {props.fixBookShelf(book)}                   
           <div className="book">
             <div className="book-top">
               <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
               <div className="book-shelf-changer">
-                <select value={this.findValue(book)} onChange={(e) => this.props.handleChange(book,e)}>
+                <select value={findValue(book)} onChange={(e) => props.handleChange(book,e)}>
                   <option value="currentlyReading" id="a">Currently Reading</option>
                   <option value="wantToRead" id="b">Want to Read</option>
                   <option value="read" id="c">Read</option>
@@ -35,7 +35,6 @@ class SearchBookResult extends Component {
 
       </ol>
 		)
-	}
 }
 
 export default SearchBookResult
