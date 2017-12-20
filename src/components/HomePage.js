@@ -6,12 +6,15 @@ import Shelf from './Shelf'
 
 class HomePage extends Component {
   state = {
-    value: ''
+    value: '',
+    updatedBook: {}
   }
 //handle Chane function is to change book shelf
   handleChange(book,event) {
     book.shelf=event.target.value
-    BooksAPI.update(book,book.shelf)
+    BooksAPI.update(book,book.shelf).then(()=>{
+      this.setState({updatedBooks: book})
+    })
     this.setState({value: event.target.value})   //setState command rerenders this page 
   }
 
