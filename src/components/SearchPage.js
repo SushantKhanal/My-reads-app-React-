@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types' 
 import { Link } from 'react-router-dom'
 import { Debounce } from 'react-throttle'
 import * as BooksAPI from '../BooksAPI'
@@ -40,7 +41,8 @@ class SearchPage extends Component {
   	render() {
   		const { query } = this.state
   		let showingBooks=this.state.books
-
+      //console.log(this.state.books)
+//Debounce optimises the search feature by executing search only after the given interval
 		return(
           <div className="search-books">
             <div className="search-books-bar">
@@ -72,5 +74,10 @@ class SearchPage extends Component {
 		)
 	}
 }
+
+SearchPage.propTypes = {
+  books: PropTypes.array.isRequired
+}
+
 
 export default SearchPage

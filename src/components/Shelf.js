@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types' 
 
 //functional stateless component to improve performance of application 
 function Shelf(props) {
@@ -32,6 +33,12 @@ function Shelf(props) {
           </div>
         </div>                             
 		)
+}
+Shelf.propTypes = {
+  books: PropTypes.array.isRequired,
+  heading: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired
 }
 
 export default Shelf

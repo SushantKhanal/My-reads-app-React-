@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types' 
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
 import Shelf from './Shelf'
@@ -11,7 +12,7 @@ class HomePage extends Component {
   handleChange(book,event) {
     book.shelf=event.target.value
     BooksAPI.update(book,book.shelf)
-    this.setState({value: event.target.value})    
+    this.setState({value: event.target.value})   //setState command rerenders this page 
   }
 
   bookShelves = [
@@ -31,6 +32,7 @@ class HomePage extends Component {
 
 
 	render() {
+    //console.log(this.props.books)
     return (
           <div className="list-books">
             <div className="list-books-title">
@@ -61,6 +63,10 @@ class HomePage extends Component {
 
 		)
 	}
+}
+
+HomePage.propTypes = {
+  books: PropTypes.array.isRequired
 }
 
 export default HomePage

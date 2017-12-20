@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types' 
 
 //functional stateless component to improve performance of application 
 function SearchBookResult(props) {
@@ -35,6 +36,12 @@ function SearchBookResult(props) {
 
       </ol>
 		)
+}
+
+SearchBookResult.propTypes = {
+  showingBooks: PropTypes.array.isRequired,
+  fixBookShelf: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired
 }
 
 export default SearchBookResult
